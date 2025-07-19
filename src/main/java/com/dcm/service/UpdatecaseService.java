@@ -38,9 +38,8 @@ private final UpdatecaseRepository updatecaseRepository;
 		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		String d = dash.format(formatters);
 		List<UpdateCase> caseDOH = new ArrayList<UpdateCase>();
-		updatecaseRepository.findByNexthearing(d).forEach(caseDOH::add);
-		dash = null;
-		return caseDOH;
+               updatecaseRepository.findByNexthearing(d).forEach(caseDOH::add);
+               return caseDOH;
 	}
 	
 	public SortedSet<UpdateCase> HearingReminder() {
@@ -53,10 +52,9 @@ private final UpdatecaseRepository updatecaseRepository;
 		
         System.out.println("Hearing reminder for date "+d+ " & "+d2);
         
-        SortedSet<UpdateCase> caseNDOH = new TreeSet<UpdateCase>();
-		updatecaseRepository.findHearings(d2, d).forEach(caseNDOH::add);
-		d= null;	
-		return caseNDOH;
+       SortedSet<UpdateCase> caseNDOH = new TreeSet<UpdateCase>();
+               updatecaseRepository.findHearings(d2, d).forEach(caseNDOH::add);
+               return caseNDOH;
 	}
 
 }

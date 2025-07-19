@@ -62,9 +62,8 @@ private final CaseRepository caseRepository;
 		String d = date.format(formatters);
         System.out.println("Hearing reminder for date "+d);
 		List<Case> caseNDOH = new ArrayList<Case>();
-		caseRepository.findByNexthearing(d).forEach(caseNDOH::add);
-		d= null;	
-		return caseNDOH;
+               caseRepository.findByNexthearing(d).forEach(caseNDOH::add);
+               return caseNDOH;
 	}
 	
 	public List<Case> TodayDOH() {
@@ -72,9 +71,8 @@ private final CaseRepository caseRepository;
 		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		String d = dash.format(formatters);
 		List<Case> caseDOH = new ArrayList<Case>();
-		caseRepository.findByNexthearing(d).forEach(caseDOH::add);
-		dash = null;
-		return caseDOH;
+               caseRepository.findByNexthearing(d).forEach(caseDOH::add);
+               return caseDOH;
 	}
 	
 	public List<Case> CategoryCount(){		
