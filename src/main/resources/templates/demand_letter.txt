@@ -1,0 +1,6 @@
+Dear {{client_name}},
+
+This letter is to formally demand payment regarding case {{case_no}} under the jurisdiction of {{jurisdiction}}. Please remit the outstanding balance of {{amount_due}} within {{due_days}} days.
+
+Sincerely,
+{{law_firm}}
