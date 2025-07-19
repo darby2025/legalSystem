@@ -1,0 +1,7 @@
+CONTRACT AGREEMENT
+
+This contract is between {{client_name}} and {{counter_party}} regarding case {{case_no}} in {{jurisdiction}}. The parties agree to the following terms:
+{{terms}}
+
+Signed,
+{{client_name}}

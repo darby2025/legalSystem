@@ -1,0 +1,5 @@
+AFFIDAVIT OF {{client_name}}
+
+I, {{client_name}}, being duly sworn, hereby state that the facts described in case {{case_no}} are true and correct to the best of my knowledge and belief.
+
+Signed on {{date}} in {{jurisdiction}}.

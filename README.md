@@ -27,3 +27,8 @@ StartUML
 Server Configuration:
 Tomcat Version 8.5.32
 JVM Version: 1.8.0_171-b11
+
+## New Features
+- Automatic document drafting with PDF and Word export via `/api/draft`.
+- Billing invoice creation and tracking via `/api/invoice` endpoints.
+
