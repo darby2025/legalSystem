@@ -269,24 +269,14 @@ public class MainController {
 		m.put("D", d);
 		request.setAttribute("m", m);
 
-		// for court -wise chart
-		String stateArray[] = new String[chart.size()];
+                // for court -wise chart
+                Map<String, Integer> m2 = new HashMap<>();
 
-		for (int i = 0; i < chart.size(); i++) {
-			String state = chart.get(i).getCourt();
-			stateArray[i] = state;
-			System.out.print("State Array  : " + stateArray[i]);
-		}
-		
-		Map<String, Integer> m2 = new HashMap<>();
-		
-		List<String> sampleList=(List<String>) Arrays.asList(stateArray);
-		
-		for(String inpt : stateArray) {
-			int frequency=Collections.frequency(sampleList,inpt);
-			m2.put(inpt, frequency);
-		}
-		request.setAttribute("m2", m2);
+                for (Case c : chart) {
+                        String court = c.getCourt();
+                        m2.merge(court, 1, Integer::sum);
+                }
+                request.setAttribute("m2", m2);
 		
 		System.out.println("Map 2 value : " + m2);
 		return "home";
