@@ -27,9 +27,9 @@
 <body>
 	<!-- Image and text -->
 	<span class="d-block p-2 bg-dark text-white"><center>Welcome
-			to Legal Managament System</center></span>
+			to EDP Lawyers Cassy Tool</center></span>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light"> <a
-		class="navbar-brand" href="home"><strong>LEGAL</strong></a>
+		class="navbar-brand" href="home"><strong>EDP Lawyers Cassy Tool</strong></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarText" aria-controls="navbarText"
 		aria-expanded="false" aria-label="Toggle navigation">
