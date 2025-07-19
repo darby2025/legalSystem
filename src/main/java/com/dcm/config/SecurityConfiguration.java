@@ -55,25 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     
  
     private PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder() {
-            @Override
-            public String encode(CharSequence charSequence) {
-            	System.out.println("Encode: "+charSequence);
-                return charSequence.toString();
-            }
-
-            @Override
-            public boolean matches(CharSequence charSequence, String s) {
-            	System.out.println("Matches: "+charSequence);
-            	System.out.println("Matches: "+s);
-//            	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//            	String hashedPassword = passwordEncoder.encode(charSequence);
-//            	System.out.println("Matches: "+hashedPassword);
-            	if(charSequence.equals(s))
-                    return true;
-            	else
-            		return false;
-            }
-        };
+        // Use BCryptPasswordEncoder to store passwords securely
+        return new BCryptPasswordEncoder();
     }
 }
