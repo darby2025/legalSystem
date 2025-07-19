@@ -35,7 +35,7 @@
 <body class="app flex-row align-items-center">
 
 	<!-- Image and text -->
-	<span class="d-block p-2 bg-dark text-white"><center>Welcome to Legal Management System</center></span>
+	<span class="d-block p-2 bg-dark text-white"><center>Welcome to EDP Lawyers Cassy Tool</center></span>
 	<nav class="navbar navbar-dark bg-primary">
 	<marquee style="color:  white; font-size:20px;">This Software
 				is a comprehensive legal case management application featuring all
@@ -102,7 +102,7 @@
 					<div class="card text-white bg-primary py-5 d-md-down-none">
 						<div class="card-body text-center">
 							<div>
-								<h2>LEGAL</h2>
+								<h2>EDP Lawyers Cassy Tool</h2>
 								<p>You can collect your <br>credentials from the System Department to get access.</p>
 							</div>
 						</div>
