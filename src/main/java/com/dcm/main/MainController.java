@@ -42,6 +42,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.dcm.LegalAppApplication;
 import com.dcm.mail.EmailServiceImpl;
@@ -57,6 +62,7 @@ import com.dcm.service.ActsService;
 import com.dcm.service.CaseService;
 import com.dcm.service.CasesTriggerService;
 import com.dcm.service.DocumentService;
+import com.dcm.service.DocumentDraftService;
 import com.dcm.service.LawyerService;
 import com.dcm.service.LogsService;
 import com.dcm.service.PayService;
@@ -112,8 +118,11 @@ public class MainController {
 	@Autowired
 	private TestService testService;
 
-	@Autowired
-	private EmailServiceImpl emailService;
+        @Autowired
+        private EmailServiceImpl emailService;
+
+        @Autowired
+        private DocumentDraftService draftService;
 
 	/* Spring Security */
 	@RequestMapping("/")
@@ -576,9 +585,9 @@ public class MainController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@ResponseBody
-	@RequestMapping(value = "/case-upload", method = RequestMethod.POST)
-	public void caseFileUpload(@RequestParam("file") MultipartFile file, @RequestParam String type,
-			@ModelAttribute Document d, BindingResult bindingResult) {
+        @RequestMapping(value = "/case-upload", method = RequestMethod.POST)
+        public void caseFileUpload(@RequestParam("file") MultipartFile file, @RequestParam String type,
+                        @ModelAttribute Document d, BindingResult bindingResult) {
 		System.out.println("Check 1");
 		d.setFile(file.getOriginalFilename());
 		System.out.println("Check 1");
@@ -602,11 +611,41 @@ public class MainController {
 			LOGGER.info("Event: Document Uploaded {}" + file.getOriginalFilename());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+                }
 
-	}
+        }
 
-	/* Case-logs controller */
+        /* Document Draft */
+        @RequestMapping("/draft")
+        public String draftForm(Model model) {
+                model.addAttribute("templates", Arrays.asList("demand_letter.txt", "affidavit.txt", "contract.txt"));
+                return "draft";
+        }
+
+        @PostMapping("/draft/generate")
+        public ResponseEntity<byte[]> generateDraft(@RequestParam String template, @RequestParam String values,
+                        @RequestParam String type) throws Exception {
+                Map<String, String> map = new ObjectMapper().readValue(values, new TypeReference<Map<String, String>>() {});
+                String content = draftService.generateContent(template, map);
+                Path file = Files.createTempFile("draft", type.equals("word") ? ".docx" : ".pdf");
+                if ("word".equals(type)) {
+                        draftService.exportToWord(content, file);
+                } else {
+                        draftService.exportToPdf(content, file);
+                }
+                byte[] data = Files.readAllBytes(file);
+                Files.deleteIfExists(file);
+                String filename = "document." + ("word".equals(type) ? "docx" : "pdf");
+                MediaType media = "word".equals(type)
+                                ? MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                                : MediaType.APPLICATION_PDF;
+                return ResponseEntity.ok()
+                                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                                .contentType(media)
+                                .body(data);
+        }
+
+        /* Case-logs controller */
 
 	@RequestMapping("/case-logs")
 	public String CaseLogs(HttpServletRequest request) {
