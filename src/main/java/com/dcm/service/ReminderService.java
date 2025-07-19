@@ -39,9 +39,8 @@ public class ReminderService {
 		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		String d = dash.format(formatters);
 		List<Reminder> reminder = new ArrayList<Reminder>();
-		reminderRepository.findByDate(d).forEach(reminder::add);
-		dash = null;
-		return reminder;
+               reminderRepository.findByDate(d).forEach(reminder::add);
+               return reminder;
 	}
 
 	public List<Reminder> MailReminder() {
@@ -49,9 +48,8 @@ public class ReminderService {
 		 DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		String d = date.format(formatters);
 		List<Reminder> reminder = new ArrayList<Reminder>();
-		reminderRepository.findByDate(d).forEach(reminder::add);
-		d= null;	
-		return reminder;
+               reminderRepository.findByDate(d).forEach(reminder::add);
+               return reminder;
 	}
 	
 	public List<Reminder> MailReminderwithTime() {
@@ -65,9 +63,8 @@ public class ReminderService {
 		System.out.println("Time  from mailReminderwithTime : "+time + " Date : "+d);
 		
 		List<Reminder> reminder = new ArrayList<Reminder>();
-		reminderRepository.findByDateAndTime(d, time).forEach(reminder::add);
-		d= null;	
-		return reminder;
+               reminderRepository.findByDateAndTime(d, time).forEach(reminder::add);
+               return reminder;
 	}
 
 	public List<Reminder> showByCaseno(String caseno) {

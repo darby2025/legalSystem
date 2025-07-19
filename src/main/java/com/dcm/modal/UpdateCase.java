@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "updatecase")
-public class UpdateCase implements Comparable{
+public class UpdateCase implements Comparable<UpdateCase>{
 	
 	@Id
 	@GeneratedValue
@@ -97,10 +97,12 @@ public class UpdateCase implements Comparable{
 		this.court = court;
 	}
 
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+       @Override
+       public int compareTo(UpdateCase o) {
+               if (o == null) {
+                       return 1;
+               }
+               return Integer.compare(this.updateid, o.updateid);
+       }
 
 }

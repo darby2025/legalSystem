@@ -55,9 +55,8 @@ public class UserService{
         System.out.println("Birthday reminder for date "+d );
         
 		List<Users> birthday = new ArrayList<Users>();
-		usersRepository.findBirthdays(d).forEach(birthday::add);
-		System.out.println("Birthday wishes send for "+d );
-		d= null;	
-		return birthday;
+               usersRepository.findBirthdays(d).forEach(birthday::add);
+               System.out.println("Birthday wishes send for "+d );
+               return birthday;
 	}
 }
